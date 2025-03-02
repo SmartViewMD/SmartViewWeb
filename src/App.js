@@ -1,63 +1,42 @@
-import React, { Component } from 'react';
-// import Layout from './components/Layout'
-import { Router,navigate} from "@reach/router"
-import logo from './logo.svg';
-import './App.css';
-import Nav from './components/nav'
-import Home from './components/home'
-import Privacy from './Privacy'
-import CovidStatement from './CovidStatement'
-import Footer from './components/footer'
-// import MyInfo from './components/MyInfo'
-// import Default from './components/Default'
-// import DashboardDefault from './components/DashboardDefault'
-// import Dashboard from './components/DataDashboard'
+import React from "react";
+//import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";  // Use HashRouter
+import V from "./components/V";
+import "./App.css";
 
-class App extends Component {
-  render(){
+//import { Header } from "./components/Header";
+import NavBar from "./components/nav";
+import Home from "./components/land/Home";
+import Privacy from "./Privacy";
+import CovidStatement from "./CovidStatement";
+import Blog from "./components/Blog";
+import Form from "./components/Form";
+import Footer from "./components/Footer.js";
+
+import Delete from "./components/DeletionRequest.js";
+import "./components/footer.css";
+
+function App() {
   return (
-    <div>
-      <Nav></Nav>
-      
-      
-            <Router>
-              <Home path="/"/>
-              <Privacy path="/privacy"/>
-              <CovidStatement path="/covidstatement"/>
-            </Router>
+    <Router>
+      <NavBar />
+      <Routes>
+        {/* No need for 'exact' anymore */}
+        <Route path="/" element={<Home />} />
+        <Route path="/video" element={<Blog />} />
+        <Route path="/V/:num" element={<V />} />
+        <Route path="/overview" element={<Form />} />
+        <Route path="/delete" element={<Delete />} />
+        
+        {/* Debugging route */}
+        <Route path="/privacy" element={<><Privacy /></>} />
 
-      <Footer></Footer>
-      </div>
+        {/* Catch-all for unknown routes */}
+        <Route path="*" element={<Home />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 
-
-}
-
 export default App;
-
-//
- 
-// import React from 'react'
-// import Layout from '../components/Layout'
-// import { Router, Link } from "@reach/router"
-// import MyInfo from '../components/MyInfo'
-// import Default from '../components/Default'
-// import DashboardDefault from '../components/Dashboarddefault'
-// import Dashboard from '../components/DataDashboard'
-
-// const App = ({location}) => {
-//     return (
-//         <Layout>
-//             <h1>Welcome to the App Page <span>{location.pathname}</span></h1>
-//               <nav>
-//                 <Link to='/app/info'>Info</Link>
-//               </nav>
-//               <Router basepath="/app">
-//                 <Default path="/"/>
-//                 <MyInfo path="/info" />
-//               </Router>
-//         </Layout>
-//     )
-// }
-// export default App;

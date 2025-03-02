@@ -1,31 +1,48 @@
-var $form = $('form#contact-form'),
-    url = 'https://script.google.com/macros/s/AKfycbwSL9zKaz1C3efz2RoDEhsoQoXgtprxptiF9Ur2D8SDDJB1-TQ/exec'
+'use strict';
 
-$('button#submit-form').on('click', function(e) {
-  e.preventDefault();
-  var jqxhr = $.ajax({
-    url: url,
-    method: "GET",
-    dataType: "json",
-    data: $form.serialize()
-  }).success(
-    alert('Thank you for contacting us.\nYour request has been submitted.\nWe will contact your by phone or email shortly.') 
-  );
-})
+//grab a form
+const form = document.querySelector('.form-inline');
 
-document.getElementById('browser').value = (function(){
-    var ua= navigator.userAgent, tem, 
-    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-    if(/trident/i.test(M[1])){
-        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return 'IE '+(tem[1] || '');
+//grab an input
+const inputEmail = form.querySelector('#inputEmail');
+
+
+//config your firebase push
+const config = {
+    apiKey: "AIzaSyDu31ycnqzp2AeCLFm_c3zCJKvvDdGNNpY",
+    authDomain: "smartview-md-contact.firebaseapp.com",
+    databaseURL: "smartview-md-contact.firebaseio.com",
+    projectId: "smartview-md-contact",
+    storageBucket: "smartview-md-contact.appspot.com",
+    messagingSenderId: "691381116793"
+};
+
+
+//create a functions to push
+    function firebasePush(input) {
+
+
+        //prevents from braking
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+        }
+
+        //push itself
+        var mailsRef = firebase.database().ref('emails').push().set(
+            {
+                mail: input.value
+            }
+        );
+
     }
-    if(M[1]=== 'Chrome'){
-        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
-        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-    }
-    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
-    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
-    return M.join(' ');
-})();
 
+//push on form submit
+    if (form) {
+        form.addEventListener('submit', function (evt) {
+            evt.preventDefault();
+            firebasePush(inputEmail);
+
+            //shows alert if everything went well.
+            return alert('Data Successfully Sent to Realtime Database');
+        })
+    }

@@ -1,0 +1,39 @@
+.left {
+    text-align: left;
+  }
+
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+  }
+
+  /* Twitter */
+.fa-twitter {
+    opacity: 0.7;
+    color: white;
+  }
+
+  .fa-github {
+    opacity: 0.7;
+    color: white;
+  }
+
+  .fa:hover {
+    opacity: 0.7;
+  }
+
+.list-unstyled.mb-0:hover,
+.list-unstyled.mb-0:focus {
+  color: #0099ff;
+  text-decoration: none;
+}
+
+.list-unstyled.mb-0,
+.list-unstyled.mb-0 {
+  color: #d8d8d8;
+  text-decoration: none;
+}

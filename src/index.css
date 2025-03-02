@@ -5,9 +5,53 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nounderline {
+  text-decoration: none !important
+}
+
+.loader:empty {
+  position: absolute;
+  top: calc(50% - 1.1em);
+  left: calc(50% - 1.1em);
+  width: 3em;
+  height: 3em;
+  border: 0.3em solid rgba(0, 0, 0, 0.2);
+  border-left: 0.3em solid  #0099ff;
+  animation: load8 1s infinite linear;
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+body { 
+  animation: fadeInAnimation ease 3s; 
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
+} 
+@keyframes fadeInAnimation { 
+  0% { 
+      opacity: 0; 
+  } 
+  100% { 
+      opacity: 2; 
+  } 
+} 
+
+iframe[src=""] {
+  display:none;
+}
+
+
